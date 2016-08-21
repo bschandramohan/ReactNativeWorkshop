@@ -17,6 +17,8 @@ class DetailScene extends Component {
   constructor(props) {
     super(props);
 
+    // Just for demo. Adding a pop at this level to go back to previous screen.
+    // Add and remove in componentWillMount and unmount in production code. 
     BackAndroid.addEventListener('hardwareBackPress', function() {
       props.navigator && props.navigator.pop();
       return true;
