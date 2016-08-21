@@ -10,11 +10,17 @@ import {
   Text,
   View,
   Image,
+  BackAndroid,
 } from 'react-native';
 
 class DetailScene extends Component {
   constructor(props) {
     super(props);
+
+    BackAndroid.addEventListener('hardwareBackPress', function() {
+      props.navigator && props.navigator.pop();
+      return true;
+    });
   }
 
   render() {
