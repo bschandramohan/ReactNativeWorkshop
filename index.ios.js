@@ -9,7 +9,9 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  Switch,
+  Alert,
 } from 'react-native';
 
 class ReactNativeWorkshop extends Component {
@@ -19,14 +21,20 @@ class ReactNativeWorkshop extends Component {
         <Text style={styles.welcome}>
           Welcome to React Native!
         </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
+        <Switch
+          onValueChange={this._switchClicked}
+          value={true}
+          disabled={false}
+        />
       </View>
+    );
+  }
+
+  _switchClicked() {
+    Alert.alert(
+      'Switch Clicked!',
+      'User has pressed the switch button',
+      [ {text: 'Cool!'} ]
     );
   }
 }
