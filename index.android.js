@@ -1,6 +1,6 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
+ * React Native workshop
+ * https://github.com/bschandramohan/ReactNativeWorkshop
  * @flow
  */
 
@@ -9,7 +9,10 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  TextInput,
+  TouchableHighlight,
+  Alert,
 } from 'react-native';
 
 class ReactNativeWorkshop extends Component {
@@ -17,18 +20,31 @@ class ReactNativeWorkshop extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome to React Native!
+          Hello Developers!
         </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
-        </Text>
+
+        // Challenge:  Add Text Input and a Button which shows a message when pressed.
+
+        // <TextInput
+        //   style={{width: 100, height: 40, borderColor: 'gray', borderWidth: 1}}
+        //   value="Sample TextInput Contents"
+        // />
+        // {/* Button */}
+        // <TouchableHighlight style={styles.marginAll} onPress={this._clickMePressed}>
+        //     <Text>Click Me!</Text>
+        // </TouchableHighlight>
       </View>
     );
   }
+
+  // _clickMePressed() {
+  //   console.log("User has pressed the click me button");
+  //   Alert.alert(
+  //     'Clicked!',
+  //     'User has pressed the click me button',
+  //     [ {text: 'Cool!'} ]
+  //   );
+  // }
 }
 
 const styles = StyleSheet.create({
