@@ -13,17 +13,30 @@ import {
   TextInput,
   TouchableHighlight,
   Alert,
+  ListView,
+  Dimensions,
+  Image,
 } from 'react-native';
 
-// import CheckBox from 'react-native-checkbox';
+// let companyList = require('./data/companies.json');
+// let windowWidth = Dimensions.get('window').width;
 
 class ReactNativeWorkshop extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      checkedStatus: true
-    };
+    // TRY 1
+    //let ds = new ListView.DataSource();
+    // You end up with error: "Must provide a rowHasChanged function"
+
+    // TRY 2 - make sure Try 1 code above is commented out
+    // let ds = new ListView.DataSource(
+    //   {rowHasChanged: (r1, r2) => r1 !== r2}
+    // );
+    //
+    // this.state = {
+    //   dataSource: ds.cloneWithRows(companyList.companies)
+    // };
   }
 
   render() {
@@ -33,50 +46,57 @@ class ReactNativeWorkshop extends Component {
           Hello Developers!
         </Text>
 
-        <TextInput
-          style={{width: 100, height: 40, borderColor: 'gray', borderWidth: 1}}
-          value="Sample TextInput Contents"
+        {/* TRY 1
+        <ListView
+          dataSource={this.state.dataSource}
         />
-        {/* Button */}
-        <TouchableHighlight style={styles.marginAll} onPress={this._clickMePressed}>
-            <Text>Click Me!</Text>
-        </TouchableHighlight>
+        this.props.renderRow is mandatory.
+        */}
 
-        // {this._renderSwitch()}
+        {/* TRY 2
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={(rowData) => <Text>{rowData.name}</Text>}
+        />
+        */}
+
+        {/* TRY 3
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={this._renderRow}
+        />
+        */}
       </View>
     );
   }
-
-  _clickMePressed() {
-    console.log("User has pressed the click me button");
-    Alert.alert(
-      'Clicked!',
-      'User has pressed the click me button',
-      [ {text: 'Cool!'} ]
-    );
-  }
-
-  // _switchClicked() {
-  //   Alert.alert(
-  //     'Switch Clicked!',
-  //     'User has pressed the switch button',
-  //     [ {text: 'Cool!'} ]
-  //   );
-  // }
   //
-  // _renderSwitch() {
+  // _renderRow(rowData) {
+  //   //console.log("rowData=");
+  //   //console.log(rowData);
+  //   // console.log("rowData.imgSrc=");
+  //   // console.log(rowData.imgSrc);
+  //
   //   return (
-  //     <CheckBox
-  //       label='Switch With Label? Cool!'
-  //       checked={this.state.checkedStatus}
-  //       onChange={(checked) => {
-  //           console.log('checked status=', checked);
-  //           this.setState({
-  //             checkedStatus: checked
-  //           });
-  //         }
-  //       }
-  //     />
+  //     <TouchableHighlight
+  //       style={{width: windowWidth}}
+  //       onPress={() => {
+  //         console.log("Row pressed;");
+  //       }}>
+  //       <View>
+  //         <View style={styles.row}>
+  //           {/*
+  //             Images aren't displayed because it has to be known at buildtime.
+  //             https://github.com/facebook/react-native/issues/2481.
+  //             Solution is to use the require file and then reference here.
+  //           */}
+  //           <Image style={styles.thumb} source={{uri: rowData.imgSrc}} />
+  //
+  //           <Text style={styles.text}>
+  //             {rowData.Title}
+  //           </Text>
+  //         </View>
+  //       </View>
+  //     </TouchableHighlight>
   //   );
   // }
 }
@@ -88,15 +108,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    padding: 10,
+    backgroundColor: '#1A6ABA',
   },
 });
 
