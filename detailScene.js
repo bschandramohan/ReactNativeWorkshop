@@ -11,14 +11,18 @@ import {
   View,
   Image,
   BackAndroid,
+  NativeModules,
+  TouchableHighlight,
 } from 'react-native';
+
+let { CompanyNativeModule } = NativeModules;
 
 class DetailScene extends Component {
   constructor(props) {
     super(props);
 
     // Just for demo. Adding a pop at this level to go back to previous screen.
-    // Add and remove in componentWillMount and unmount in production code. 
+    // Add and remove in componentWillMount and unmount in production code.
     BackAndroid.addEventListener('hardwareBackPress', function() {
       props.navigator && props.navigator.pop();
       return true;
@@ -37,6 +41,17 @@ class DetailScene extends Component {
         <Text style={styles.instructions}>
           {Account = this.props.companyDescription}
         </Text>
+
+        <TouchableHighlight
+          onPress={ () => {
+            // console.log("CompanyNativeModule=", CompanyNativeModule);
+            if (typeof CompanyNativeModule !== "undefined") {
+              CompanyNativeModule.select(this.props.companyName);
+            }
+          }}
+        >
+          <Text style={{fontSize: 28, marginTop: 40}}>Select</Text>
+        </TouchableHighlight>
       </View>
     );
   }
